@@ -12,13 +12,13 @@ def sendEmail(my_addr, yr_addr):
     else:
         print("유효한 email주소가 아닙니다")
 
-title = "백엔드 전민규"
+title = "안녕하세요"
 content = "현재 상영중인 영화 목록입니다 \n\n"
 
-my_email = "###@gmail.com"
-my_pwd = "####"
+my_email = "coby4313@gmail.com"
+my_pwd = "code&bboy"
 
-your_email = "###@likelion.org"
+your_email = "kit@likelion.org"
 
 reg = "^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$"
 print(re.match(reg, my_email))
@@ -26,13 +26,11 @@ print(re.match(reg, your_email))
 
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 465
-#SMTP_PORT = 486
+#SMTP_PORT = 486  #멋사메일 포트넘버
 
-with open("on_the_screen.txt", "r") as text:
+with open("on_the_screen.txt", "rb") as text:
     text_file = text.read()
     
-    for line in text_file:
-        content = content + line
 
 message = EmailMessage()
 message.set_content(content)
@@ -41,7 +39,7 @@ message["Subject"] = title
 message["From"] = my_email
 message["To"] = your_email
 
-message.add_attachment(text_file)
+message.add_attachment(text_file, maintype="txt", subtype="txt")
 
 smtp = smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT)
 smtp.login(my_email, my_pwd)

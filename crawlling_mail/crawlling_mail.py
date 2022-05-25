@@ -19,10 +19,11 @@ url = 'https://movie.naver.com/movie/running/current.naver'
 
 #src 가져오기
 respons = requests.get(url, headers = header)
-soup = BeautifulSoup(respons.text, 'html.parser')
+
+soup = BeautifulSoup(respons.text, 'html.parser', from_encoding='utf-8')
 
 #copy url_html_source_code to movie.html
-html_open = open("movie.html", "w", encoding='utf8')
+html_open = open("movie.html", "w", encoding='utf-8')
 html_open.write(respons.text)
 html_open.close()
 
